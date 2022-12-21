@@ -1,0 +1,10 @@
+.ui .grid {
+  margin: 0 !important;
+}
+
+.similar-movies {
+  margin-left: 20px;
+  margin-right: 20px;
+  border-top: 1px solid black;
+  padding-top: 10px;
+}
