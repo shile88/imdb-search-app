@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import MovieDetails from "./MovieDetails";
-import MovieCover from "./MovieCover";
-import Header from "./Header";
-import MovieList from "./MovieList";
 import {
   fetchAsyncMovieDetail,
   getSelectedMovie,
   removeSelectedMovie,
 } from "../features/movies/movieSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import Header from "./Header";
+import MovieCover from "./MovieCover";
+import MovieDetails from "./MovieDetails";
+import MovieList from "./MovieList";
+import { useParams } from "react-router-dom";
 
 const DetailsScreen = () => {
   const { imdbID } = useParams();
@@ -27,12 +28,20 @@ const DetailsScreen = () => {
     <div>
       <Header />
       {Object.keys(data).length === 0 ? (
-        <div className="ui raised very padded text container loading basic segment"></div>
+        <div className="ui center aligned container" style={{marginTop: '50px'}}>
+        <div className="ui massive icon message">
+          <i className="notched circle loading icon"></i>
+          <div className="content">
+            <div className="header">Just one second</div>
+            <p>We're fetching that content for you.</p>
+          </div>
+        </div>
+        </div>
       ) : (
         <div className="ui fluid container">
           <div className="ui container">
-            <div className="ui stackable grid proba">
-              <div className="four wide column">
+            <div className="ui stackable grid">
+              <div className="four wide column" style={{marginTop: '-20px'}}>
                 <MovieCover data={data} />
               </div>
               <div className="twelve wide column">
@@ -40,13 +49,13 @@ const DetailsScreen = () => {
               </div>
             </div>
           </div>
-        
-            <h1 className="similar-movies">More movies like this:</h1>
-            <div className="ui grid"> 
-                <div className="computer only ten column">                
-                    <MovieList />    
-                </div>
+
+          <h1 className="similar-movies">More movies like this:</h1>
+          <div className="ui grid">
+            <div className="ui row">
+              <MovieList />
             </div>
+          </div>
         </div>
       )}
     </div>
